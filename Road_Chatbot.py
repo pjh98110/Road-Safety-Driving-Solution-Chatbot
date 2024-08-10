@@ -35,7 +35,7 @@ def check_session_vars():
 selected_chatbot = st.sidebar.selectbox(
     "(1) 원하는 챗봇을 선택하세요.",
     options=["GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", "Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", "GPT를 통해 어린이보호구역 사고예방 및 안전운전 솔루션 제공 챗봇", 
-             "Gemini를 통해 어린이보호구역 사고예방 및 안전운전 솔루션 제공 챗봇", "GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", "Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇"],
+             "Gemini를 통해 어린이보호구역 사고예방 및 안전운전 솔루션 제공 챗봇", "GPT를 통한 교통사고 위험도에 따른 사고예방 솔루션 제공 챗봇", "Gemini를 통한 교통사고 위험도에 따른 사고예방 솔루션 제공 챗봇"],
     help="선택한 챗봇에 따라 맞춤형 결과물을 제공합니다."
 )
 
@@ -326,8 +326,8 @@ def gpt_prompt_1(user_input):
 # GPT 프롬프트 엔지니어링 함수 2
 def gpt_prompt_2(user_input):
     base_prompt = f"""
-    너는 사용자가 요구한 맞춤형 정보를 작성하는 친절하고 차분한 [ 관리자]이다. 
-    사용자가 선택한 {st.session_state.type_weather} 에 설치할 입지를 선정하고, 근거자료를 작성한다.
+    너는 사용자가 요구한 맞춤형 정보를 작성하는 친절하고 차분한 [도로안전 솔루션 챗봇]이다. 
+    사용자가 선택한 {selected_district} 지역의 기상 정보: {st.session_state.type_weather}를 참고하여 어린이보호구역 사고예방 및 안전운전 솔루션 작성한다.
     내가 채팅을 입력하면 아래의 <규칙>에 따라서 답변한다.
 
     <규칙>
@@ -420,8 +420,8 @@ def gemini_prompt_1(user_input):
 # Gemini 프롬프트 엔지니어링 함수 2
 def gemini_prompt_2(user_input):
     base_prompt = f"""
-    너는 사용자가 요구한 맞춤형 정보를 작성하는 친절하고 차분한 [ 관리자]이다. 
-    사용자가 선택한 {st.session_state.type_weather} 에 설치할 입지를 선정하고, 근거자료를 작성한다.
+    너는 사용자가 요구한 맞춤형 정보를 작성하는 친절하고 차분한 [도로안전 솔루션 챗봇]이다. 
+    사용자가 선택한 {selected_district} 지역의 기상 정보: {st.session_state.type_weather}를 참고하여 어린이보호구역 사고예방 및 안전운전 솔루션 작성한다.
     내가 채팅을 입력하면 아래의 <규칙>에 따라서 답변한다.
 
     <규칙>
@@ -742,9 +742,9 @@ elif selected_chatbot == "Gemini를 통해 어린이보호구역 사고예방 �
         except Exception as e:
             st.error(f"Gemini API 요청 중 오류가 발생했습니다: {str(e)}")
 
-elif selected_chatbot == "GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇":
+elif selected_chatbot == "GPT를 통한 교통사고 위험도에 따른 사고예방 솔루션 제공 챗봇":
     colored_header(
-        label="GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇",
+        label="GPT를 통한 교통사고 위험도에 따른 사고예방 솔루션 제공 챗봇",
         description=None,
         color_name="gray-70",
     )
@@ -798,9 +798,9 @@ elif selected_chatbot == "GPT를 통한 기상 요인 및 도로상태에 따른
         except Exception as e:
             st.error(f"OpenAI API 요청 중 오류가 발생했습니다: {str(e)}")
 
-elif selected_chatbot == "Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇":
+elif selected_chatbot == "Gemini를 통한 교통사고 위험도에 따른 사고예방 솔루션 제공 챗봇":
     colored_header(
-        label="Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇",
+        label="Gemini를 통한 교통사고 위험도에 따른 사고예방 솔루션 제공 챗봇",
         description=None,
         color_name="gray-70",
     )
