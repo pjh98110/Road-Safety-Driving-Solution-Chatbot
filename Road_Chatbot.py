@@ -56,6 +56,14 @@ selected_car = st.sidebar.selectbox(
 )
 st.session_state.selected_car = selected_car
 
+# 사이드바에서 지역 선택
+selected_district = st.sidebar.selectbox(
+    "(4) 당신의 지역을 선택하세요:",
+    ('서울특별시', '경기도', '부산광역시', '인천광역시', '충청북도', '충청남도', 
+    '세종특별자치시', '대전광역시', '전북특별자치도', '전라남도', '광주광역시', 
+    '경상북도', '경상남도', '대구광역시', '울산광역시', '강원특별자치도', '제주특별자치도')
+)
+st.session_state.selected_district = selected_district
 
 # 사이드바에서 조건 선택 (해당 챗봇 선택 시)
 if selected_chatbot in ["GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", "Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇"]:
@@ -141,15 +149,6 @@ if selected_chatbot in ["GPT를 통한 기상 요인 및 도로상태에 따른 
     # 오늘 날짜와 1일 전 날짜 계산(기상청에서 최근 3일만 제공)
     today = datetime.today()
     three_days_ago = today - timedelta(days=1)
-
-    # 사이드바에서 지역 선택
-    selected_district = st.sidebar.selectbox(
-        "(4) 당신의 지역을 선택하세요:",
-        ('서울특별시', '경기도', '부산광역시', '인천광역시', '충청북도', '충청남도', 
-        '세종특별자치시', '대전광역시', '전북특별자치도', '전라남도', '광주광역시', 
-        '경상북도', '경상남도', '대구광역시', '울산광역시', '강원특별자치도', '제주특별자치도')
-    )
-    st.session_state.selected_district = selected_district
 
     # 사이드바에서 날짜 선택
     selected_day = st.sidebar.date_input(
