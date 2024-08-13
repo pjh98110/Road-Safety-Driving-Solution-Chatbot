@@ -66,7 +66,8 @@ selected_district = st.sidebar.selectbox(
 st.session_state.selected_district = selected_district
 
 # 사이드바에서 조건 선택 (해당 챗봇 선택 시)
-if selected_chatbot in ["GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", "Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇"]:
+if selected_chatbot in ["GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", "Gemini를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇", 
+                        "GPT를 통해 어린이보호구역 사고예방 및 안전운전 솔루션 제공 챗봇", "Gemini를 통해 어린이보호구역 사고예방 및 안전운전 솔루션 제공 챗봇"]:
 
 
     # 기상청 단기예보 API 불러오기
