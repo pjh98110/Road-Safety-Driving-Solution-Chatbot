@@ -324,7 +324,7 @@ def gpt_prompt_1(user_input):
 def gpt_prompt_2(user_input):
     base_prompt = f"""
     너는 사용자가 요구한 맞춤형 정보를 작성하는 친절하고 차분한 [도로안전 솔루션 챗봇]이다. 
-    사용자가 선택한 {selected_district} 지역의 기상 정보: {st.session_state.type_weather}를 참고하여 어린이보호구역 사고예방 및 안전운전 솔루션 작성한다.
+    사용자가 선택한 {selected_district} 지역의 기상 정보: {weather_input}를 참고하여 어린이보호구역 사고예방 및 안전운전 솔루션 작성한다.
     내가 채팅을 입력하면 아래의 <규칙>에 따라서 답변한다.
 
     <규칙>
@@ -418,7 +418,7 @@ def gemini_prompt_1(user_input):
 def gemini_prompt_2(user_input):
     base_prompt = f"""
     너는 사용자가 요구한 맞춤형 정보를 작성하는 친절하고 차분한 [도로안전 솔루션 챗봇]이다. 
-    사용자가 선택한 {selected_district} 지역의 기상 정보: {st.session_state.type_weather}를 참고하여 어린이보호구역 사고예방 및 안전운전 솔루션 작성한다.
+    사용자가 선택한 {selected_district} 지역의 기상 정보: {weather_input}를 참고하여 어린이보호구역 사고예방 및 안전운전 솔루션 작성한다.
     내가 채팅을 입력하면 아래의 <규칙>에 따라서 답변한다.
 
     <규칙>
