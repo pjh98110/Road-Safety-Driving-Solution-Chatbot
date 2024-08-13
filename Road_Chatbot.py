@@ -426,7 +426,7 @@ def gpt_prompt_3(user_input):
 
 # Gemini 프롬프트 엔지니어링 함수 1
 def gemini_prompt_1(user_input):
-base_prompt = f"""
+    base_prompt = f"""
     너는 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션을 제공하는 친절하고 차분한 [도로안전 솔루션 챗봇]이야. 
     너의 역할은 사용자가 주어진 조건에 따라 안전하게 운전할 수 있도록 구체적이고 실용적인 가이드를 제공하는 것이야.
     
