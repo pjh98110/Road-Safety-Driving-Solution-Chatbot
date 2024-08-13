@@ -23,6 +23,9 @@ if "gpt_api_key" not in st.session_state:
 if "gemini_api_key" not in st.session_state:
     st.session_state.gemini_api_key = st.secrets["secrets"]["GEMINI_API_KEY"]
 
+if 'selected_district' not in st.session_state:
+    st.session_state.selected_district = "서울특별시"
+
 # 세션 변수 체크
 def check_session_vars():
     required_vars = ['selected_road']
@@ -157,8 +160,6 @@ if selected_chatbot in ["GPT를 통한 기상 요인 및 도로상태에 따른 
     ).strftime('%Y%m%d')
     st.session_state.selected_day = selected_day
 
-
-
     # 상태 저장을 통해 중복 요청 방지 및 갱신
     # if ('weather_data' not in st.session_state or 
     #     st.session_state.selected_district != selected_district or 
@@ -173,10 +174,6 @@ if selected_chatbot in ["GPT를 통한 기상 요인 및 도로상태에 따른 
 
     # 날짜와 시도의 기상 정보 가져오기
     weather_data = weather_info(st.session_state.selected_day, st.session_state.selected_district)
-
-
-
-
 
 
     # 특정 시간의 날씨 데이터를 필터링하는 함수
