@@ -604,12 +604,12 @@ if "gemini_messages2" not in st.session_state:
 
 if "gpt_messages3" not in st.session_state:
     st.session_state.gpt_messages3 = [
-        {"role": "system", "content": "GPT가 사용자에게 도로상태에 따른 사고예방 및 안전운전 솔루션을 알려드립니다."}
+        {"role": "system", "content": "GPT가 사용자에게 교통사고 위험도에 따른 사고예방 솔루션 제공해드립니다."}
     ]
 
 if "gemini_messages3" not in st.session_state:
     st.session_state.gemini_messages3 = [
-        {"role": "model", "parts": [{"text": "Gemini가 사용자에게 도로상태에 따른 사고예방 및 안전운전 솔루션을 알려드립니다."}]}
+        {"role": "model", "parts": [{"text": "Gemini가 사용자에게 교통사고 위험도에 따른 사고예방 솔루션 제공해드립니다."}]}
     ]
 
 if selected_chatbot == "GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇":
