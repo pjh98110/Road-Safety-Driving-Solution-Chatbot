@@ -592,6 +592,26 @@ if "gemini_messages" not in st.session_state:
         {"role": "model", "parts": [{"text": "Gemini가 사용자에게 도로상태에 따른 사고예방 및 안전운전 솔루션을 알려드립니다."}]}
     ]
 
+if "gpt_messages2" not in st.session_state:
+    st.session_state.gpt_messages2 = [
+        {"role": "system", "content": "GPT를 통해 어린이보호구역 사고예방 및 안전운전 솔루션을 알려드립니다."}
+    ]
+
+if "gemini_messages2" not in st.session_state:
+    st.session_state.gemini_messages2 = [
+        {"role": "model", "parts": [{"text": "Gemini를 통해 어린이보호구역 사고예방 및 안전운전 솔루션을 알려드립니다."}]}
+    ]
+
+if "gpt_messages3" not in st.session_state:
+    st.session_state.gpt_messages3 = [
+        {"role": "system", "content": "GPT가 사용자에게 도로상태에 따른 사고예방 및 안전운전 솔루션을 알려드립니다."}
+    ]
+
+if "gemini_messages3" not in st.session_state:
+    st.session_state.gemini_messages3 = [
+        {"role": "model", "parts": [{"text": "Gemini가 사용자에게 도로상태에 따른 사고예방 및 안전운전 솔루션을 알려드립니다."}]}
+    ]
+
 if selected_chatbot == "GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇":
     colored_header(
         label="GPT를 통한 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 챗봇",
@@ -731,14 +751,14 @@ elif selected_chatbot == "GPT를 통해 어린이보호구역 사고예방 및 �
 
     # 대화 초기화 버튼
     def on_clear_chat_gpt():
-        st.session_state.gpt_messages = [
+        st.session_state.gpt_messages2 = [
             {"role": "system", "content": "GPT를 통해 어린이보호구역 사고예방 및 안전운전 솔루션을 알려드립니다."}
         ]
 
     st.button("대화 초기화", on_click=on_clear_chat_gpt)
 
     # 이전 메시지 표시
-    for msg in st.session_state.gpt_messages:
+    for msg in st.session_state.gpt_messages2:
         role = 'user' if msg['role'] == 'user' else 'assistant'
         with st.chat_message(role):
             st.write(msg['content'])
@@ -746,7 +766,7 @@ elif selected_chatbot == "GPT를 통해 어린이보호구역 사고예방 및 �
     # 사용자 입력 처리
     if prompt := st.chat_input("챗봇과 대화하기:"):
         # 사용자 메시지 추가
-        st.session_state.gpt_messages.append({"role": "user", "content": prompt})
+        st.session_state.gpt_messages2.append({"role": "user", "content": prompt})
         with st.chat_message('user'):
             st.write(prompt)
 
@@ -759,7 +779,7 @@ elif selected_chatbot == "GPT를 통해 어린이보호구역 사고예방 및 �
                 model="gpt-4o",
                 messages=[
                     {"role": "system", "content": enhanced_prompt}
-                ] + st.session_state.gpt_messages,
+                ] + st.session_state.gpt_messages2,
                 max_tokens=1500,
                 temperature=0.8,
                 top_p=1.0,
@@ -769,7 +789,7 @@ elif selected_chatbot == "GPT를 통해 어린이보호구역 사고예방 및 �
             text = response.choices[0]['message']['content']
 
             # 응답 메시지 표시 및 저장
-            st.session_state.gpt_messages.append({"role": "assistant", "content": text})
+            st.session_state.gpt_messages2.append({"role": "assistant", "content": text})
             with st.chat_message("assistant"):
                 st.write(text)
         except Exception as e:
@@ -797,11 +817,11 @@ elif selected_chatbot == "Gemini를 통해 어린이보호구역 사고예방 �
         top_p = st.slider("Top P", min_value=0.0, max_value=1.0, value=0.95, help="다음 단어를 선택할 때 고려할 후보 단어의 누적 확률을 설정합니다.")
 
     st.button("대화 초기화", on_click=lambda: st.session_state.update({
-        "gemini_messages": [{"role": "model", "parts": [{"text": "Gemini를 통해 어린이보호구역 사고예방 및 안전운전 솔루션을 알려드립니다."}]}]
+        "gemini_messages2": [{"role": "model", "parts": [{"text": "Gemini를 통해 어린이보호구역 사고예방 및 안전운전 솔루션을 알려드립니다."}]}]
     }))
 
     # 이전 메시지 표시
-    for msg in st.session_state.gemini_messages:
+    for msg in st.session_state.gemini_messages2:
         role = 'human' if msg['role'] == 'user' else 'ai'
         with st.chat_message(role):
             st.write(msg['parts'][0]['text'] if 'parts' in msg and 'text' in msg['parts'][0] else '')
@@ -809,7 +829,7 @@ elif selected_chatbot == "Gemini를 통해 어린이보호구역 사고예방 �
     # 사용자 입력 처리
     if prompt := st.chat_input("챗봇과 대화하기:"):
         # 사용자 메시지 추가
-        st.session_state.gemini_messages.append({"role": "user", "parts": [{"text": prompt}]})
+        st.session_state.gemini_messages2.append({"role": "user", "parts": [{"text": prompt}]})
         with st.chat_message('human'):
             st.write(prompt)
 
@@ -826,7 +846,7 @@ elif selected_chatbot == "Gemini를 통해 어린이보호구역 사고예방 �
                 "top_p": top_p
             }
             model = genai.GenerativeModel(model_name=model_name, generation_config=generation_config)
-            chat = model.start_chat(history=st.session_state.gemini_messages)
+            chat = model.start_chat(history=st.session_state.gemini_messages2)
             response = chat.send_message(enhanced_prompt, stream=True)
 
             with st.chat_message("ai"):
@@ -842,7 +862,7 @@ elif selected_chatbot == "Gemini를 통해 어린이보호구역 사고예방 �
             placeholder.write(text)
 
             # 응답 메시지 표시 및 저장
-            st.session_state.gemini_messages.append({"role": "model", "parts": [{"text": text}]})
+            st.session_state.gemini_messages2.append({"role": "model", "parts": [{"text": text}]})
         except Exception as e:
             st.error(f"Gemini API 요청 중 오류가 발생했습니다: {str(e)}")
 
@@ -858,14 +878,14 @@ elif selected_chatbot == "GPT를 통한 교통사고 위험도에 따른 사고�
 
     # 대화 초기화 버튼
     def on_clear_chat_gpt():
-        st.session_state.gpt_messages = [
-            {"role": "system", "content": "GPT가 사용자에게 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션 제공 출력해드립니다."}
+        st.session_state.gpt_messages3 = [
+            {"role": "system", "content": "GPT가 사용자에게 교통사고 위험도에 따른 사고예방 솔루션 제공해드립니다."}
         ]
 
     st.button("대화 초기화", on_click=on_clear_chat_gpt)
 
     # 이전 메시지 표시
-    for msg in st.session_state.gpt_messages:
+    for msg in st.session_state.gpt_messages3:
         role = 'user' if msg['role'] == 'user' else 'assistant'
         with st.chat_message(role):
             st.write(msg['content'])
@@ -873,7 +893,7 @@ elif selected_chatbot == "GPT를 통한 교통사고 위험도에 따른 사고�
     # 사용자 입력 처리
     if prompt := st.chat_input("챗봇과 대화하기:"):
         # 사용자 메시지 추가
-        st.session_state.gpt_messages.append({"role": "user", "content": prompt})
+        st.session_state.gpt_messages3.append({"role": "user", "content": prompt})
         with st.chat_message('user'):
             st.write(prompt)
 
@@ -886,7 +906,7 @@ elif selected_chatbot == "GPT를 통한 교통사고 위험도에 따른 사고�
                 model="gpt-4o",
                 messages=[
                     {"role": "system", "content": enhanced_prompt}
-                ] + st.session_state.gpt_messages,
+                ] + st.session_state.gpt_messages3,
                 max_tokens=1500,
                 temperature=0.8,
                 top_p=1.0,
@@ -896,7 +916,7 @@ elif selected_chatbot == "GPT를 통한 교통사고 위험도에 따른 사고�
             text = response.choices[0]['message']['content']
 
             # 응답 메시지 표시 및 저장
-            st.session_state.gpt_messages.append({"role": "assistant", "content": text})
+            st.session_state.gpt_messages3.append({"role": "assistant", "content": text})
             with st.chat_message("assistant"):
                 st.write(text)
         except Exception as e:
@@ -924,11 +944,11 @@ elif selected_chatbot == "Gemini를 통한 교통사고 위험도에 따른 사�
         top_p = st.slider("Top P", min_value=0.0, max_value=1.0, value=0.95, help="다음 단어를 선택할 때 고려할 후보 단어의 누적 확률을 설정합니다.")
 
     st.button("대화 초기화", on_click=lambda: st.session_state.update({
-        "gemini_messages": [{"role": "model", "parts": [{"text": "Gemini가 사용자에게 기상 요인 및 도로상태에 따른 사고예방 및 안전운전 솔루션을 제공해드립니다."}]}]
+        "gemini_messages3": [{"role": "model", "parts": [{"text": "Gemini가 사용자에게 교통사고 위험도에 따른 사고예방 솔루션 제공해드립니다."}]}]
     }))
 
     # 이전 메시지 표시
-    for msg in st.session_state.gemini_messages:
+    for msg in st.session_state.gemini_messages3:
         role = 'human' if msg['role'] == 'user' else 'ai'
         with st.chat_message(role):
             st.write(msg['parts'][0]['text'] if 'parts' in msg and 'text' in msg['parts'][0] else '')
@@ -936,7 +956,7 @@ elif selected_chatbot == "Gemini를 통한 교통사고 위험도에 따른 사�
     # 사용자 입력 처리
     if prompt := st.chat_input("챗봇과 대화하기:"):
         # 사용자 메시지 추가
-        st.session_state.gemini_messages.append({"role": "user", "parts": [{"text": prompt}]})
+        st.session_state.gemini_messages3.append({"role": "user", "parts": [{"text": prompt}]})
         with st.chat_message('human'):
             st.write(prompt)
 
@@ -953,7 +973,7 @@ elif selected_chatbot == "Gemini를 통한 교통사고 위험도에 따른 사�
                 "top_p": top_p
             }
             model = genai.GenerativeModel(model_name=model_name, generation_config=generation_config)
-            chat = model.start_chat(history=st.session_state.gemini_messages)
+            chat = model.start_chat(history=st.session_state.gemini_messages3)
             response = chat.send_message(enhanced_prompt, stream=True)
 
             with st.chat_message("ai"):
@@ -969,6 +989,6 @@ elif selected_chatbot == "Gemini를 통한 교통사고 위험도에 따른 사�
             placeholder.write(text)
 
             # 응답 메시지 표시 및 저장
-            st.session_state.gemini_messages.append({"role": "model", "parts": [{"text": text}]})
+            st.session_state.gemini_messages3.append({"role": "model", "parts": [{"text": text}]})
         except Exception as e:
             st.error(f"Gemini API 요청 중 오류가 발생했습니다: {str(e)}")
